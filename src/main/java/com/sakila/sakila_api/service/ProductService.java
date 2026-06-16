@@ -28,10 +28,12 @@ public class ProductService {
     @Transactional
     public Product createProduct(Product product) { return productRepository.save(product); }
 
-    public boolean removeProduct(Long id){
+    public boolean discontinueProduct(Long id){
 
         if(productRepository.existsById(id)){
-            productRepository.deleteById(id);
+            Product product = productRepository.getReferenceById(id);
+            product.setDiscontinued(true);
+            productRepository.save(product);
             return true;
         }
         return false;

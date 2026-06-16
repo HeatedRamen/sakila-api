@@ -44,9 +44,14 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> removeProduct(@PathVariable Long id){
+    public ResponseEntity<Void> discontinueProduct(@PathVariable Long id) {
 
-        productService.removeProduct(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        boolean deleted = productService.discontinueProduct(id);
+
+        if (deleted) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.notFound().build();
     }
 }
