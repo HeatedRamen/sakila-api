@@ -21,9 +21,9 @@ public class ProductService {
 
     public Optional<Product> getProductById(Long id) { return productRepository.findById(id); }
 
-    public Optional<Product> getProductByCategoryId(Long id) { return productRepository.findByCategoryId(id); }
+    public List<Product> getProductByCategoryId(Long id) { return productRepository.findByCategoryId(id); }
 
-    public Optional<Product> getProductByName(String name) { return  productRepository.findByProductNameContainingIgnoreCase(name); }
+    public List<Product> getProductByName(String name) { return  productRepository.findByProductNameContainingIgnoreCase(name); }
 
     @Transactional
     public Product createProduct(Product product) { return productRepository.save(product); }

@@ -19,7 +19,7 @@ public class CategoryService {
 
     public Optional<Category> getCategoryById(Long id) { return categoryRepository.findById(id); }
 
-    public Optional<Category> getCategoryByName(String name) { return categoryRepository.findByCategoryNameContainingIgnoreCase(name); }
+    public List<Category> getCategoryByName(String name) { return categoryRepository.findByCategoryNameContainingIgnoreCase(name); }
 
     @Transactional
     public Category createCategory(Category category) { return categoryRepository.save(category); }
