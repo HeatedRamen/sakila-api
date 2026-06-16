@@ -17,21 +17,22 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public List<Product> getAllProducts() {return productRepository.findAll(); }
+    public List<Product> getAllProducts() { return productRepository.findAll(); }
 
     public Optional<Product> getProductById(Long id) { return productRepository.findById(id); }
 
-    public List<Product> getProductByCategoryId(Long id) { return productRepository.findByCategoryId(id); }
+    public Optional<Product> getProductByCategoryId(Long id) { return productRepository.findByCategoryId(id); }
 
-    public List<Product> getProductByName(String name) { return  productRepository.findByProductNameContainingIgnoreCase(name); }
+    public Optional<Product> getProductByName(String name) { return  productRepository.findByProductNameContainingIgnoreCase(name); }
 
     @Transactional
     public Product createProduct(Product product) { return productRepository.save(product); }
 
+    @Transactional
     public boolean discontinueProduct(Long id){
 
         if(productRepository.existsById(id)){
-            Product product = productRepository.getReferenceById(id);
+            Product product = productRepository.getById(id);
             product.setDiscontinued(true);
             productRepository.save(product);
             return true;
