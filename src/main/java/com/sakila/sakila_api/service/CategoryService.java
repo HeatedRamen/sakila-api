@@ -21,6 +21,14 @@ public class CategoryService {
 
     public List<Category> getCategoryByName(String name) { return categoryRepository.findByCategoryNameContainingIgnoreCase(name); }
 
+    public Optional<Category> updateCategory(Long id, Category newCategory){
+        return categoryRepository.findById(id).map(existingCategory -> {
+            existingCategory.setCategoryName(newCategory.getCategoryName());
+            existingCategory.setDescription(newCategory.getDescription());
+            return categoryRepository.save(existingCategory);
+        });
+
+    }
     @Transactional
     public Category createCategory(Category category) { return categoryRepository.save(category); }
 

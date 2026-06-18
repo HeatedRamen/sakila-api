@@ -19,6 +19,9 @@ public class Product {
     @Column(name = "SupplierId")
     private Long supplierId;
 
+    @Column(name = "CategoryID")
+    private Long categoryId;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CategoryID", insertable = false, updatable = false)
     private Category category;
